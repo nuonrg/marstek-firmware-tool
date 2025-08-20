@@ -36,7 +36,22 @@ exports.handler = async (event, context) => {
       console.log('Proxying download request to:', targetUrl);
     } else {
       // For API calls, build URL with eu.hamedata.com base
-      targetUrl = `https://cors-anywhere.com/https://eu.hamedata.com${endpoint}?${new URLSearchParams(params).toString()}`;
+      const endpoint = "/api/data";
+const params = { id: 123 };
+
+const targetUrl = `https://cors-anywhere.herokuapp.com/https://eu.hamedata.com${endpoint}?${new URLSearchParams(params).toString()}`;
+
+fetch(targetUrl, {
+  method: "GET",
+  headers: {
+    "Origin": "https://your-site.com", // or use x-requested-with
+    "x-requested-with": "XMLHttpRequest"
+  }
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(err => console.error("Error:", err));
+      
       console.log('Proxying API request to:', targetUrl);
     }
 
