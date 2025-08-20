@@ -36,7 +36,7 @@ exports.handler = async (event, context) => {
       console.log('Proxying download request to:', targetUrl);
     } else {
       // For API calls, build URL with eu.hamedata.com base
-      targetUrl = `https://eu.hamedata.com${endpoint}?${new URLSearchParams(params).toString()}`;
+      targetUrl = `https://cors-anywhere.com/https://eu.hamedata.com${endpoint}?${new URLSearchParams(params).toString()}`;
       console.log('Proxying API request to:', targetUrl);
     }
 
